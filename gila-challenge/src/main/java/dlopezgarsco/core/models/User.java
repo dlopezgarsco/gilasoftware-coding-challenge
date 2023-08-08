@@ -12,8 +12,10 @@ public class User {
     public User(Integer id, String name, String email, String phoneNumber) {
         this.id = id;
         this.name = name;
-        this.email = new Email(email).getValue();
-        this.phoneNumber = new PhoneNumber(phoneNumber).getValue();
+//         TODO: normally I'd use classes to create these fields with a regex validator
+//         but since the data is mocked and cannot be inserted I might skip it.
+        this.email = email ;
+        this.phoneNumber = phoneNumber;
     }
 
 
