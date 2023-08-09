@@ -1,23 +1,46 @@
-package dlopezgarsco.core.models;
+package dlopezgarsco.api.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
+import dlopezgarsco.api.category.Category;
+import dlopezgarsco.api.channel.Channel;
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
+
+import java.util.List;
 
 public class User {
     private final Integer id;
     private final String name;
     private final String email;
     private final String phoneNumber;
+    private List<Category> categories;
+    private List<Channel> channels;
 
-    public User(Integer id, String name, String email, String phoneNumber) {
+    public User(
+            @ColumnName("id") Integer id,
+            @ColumnName("name") String name,
+            @ColumnName("email") String email,
+            @ColumnName("phone_number") String phoneNumber) {
         this.id = id;
         this.name = name;
-//         TODO: normally I'd use classes to create these fields with a regex validator
-//         but since the data is mocked and cannot be inserted I might skip it.
-        this.email = email ;
+        this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
+    public User(
+            Integer id,
+            String name,
+            String email,
+            String phoneNumber,
+            List<Category> categories,
+            List<Channel> channels) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.categories = categories;
+        this.channels = channels;
+    }
 
     @JsonProperty
     public Integer getId() {
@@ -60,5 +83,13 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hashCode(id, name, email, phoneNumber);
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public List<Channel> getChannels() {
+        return channels;
     }
 }
