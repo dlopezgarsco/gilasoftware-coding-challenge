@@ -73,26 +73,32 @@ public class User {
         return channels;
     }
 
+    @JsonProperty
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
+    @JsonProperty
     public void setName(String name) {
         this.name = name;
     }
 
+    @JsonProperty
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @JsonProperty
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    @JsonProperty
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 
+    @JsonProperty
     public void setChannels(Set<Channel> channels) {
         this.channels = channels;
     }

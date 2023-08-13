@@ -30,10 +30,12 @@ public class Channel {
         return Objects.hashCode(channelId, name);
     }
 
+    @JsonProperty
     public void setChannelId(Integer channelId) {
         this.channelId = channelId;
     }
 
+    @JsonProperty
     public void setName(String name) {
         this.name = name;
     }

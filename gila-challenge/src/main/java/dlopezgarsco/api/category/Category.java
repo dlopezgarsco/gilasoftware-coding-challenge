@@ -38,10 +38,12 @@ public class Category {
                 '}';
     }
 
+    @JsonProperty
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
+    @JsonProperty
     public void setName(String name) {
         this.name = name;
     }
