@@ -1,9 +1,7 @@
-package dlopezgarsco.api.user;
+package dlopezgarsco.db;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
-import dlopezgarsco.api.category.Category;
-import dlopezgarsco.api.channel.Channel;
 import org.jdbi.v3.core.mapper.Nested;
 
 import java.util.HashSet;

@@ -1,7 +1,5 @@
-package dlopezgarsco.api.user;
+package dlopezgarsco.db;
 
-import dlopezgarsco.api.category.Category;
-import dlopezgarsco.api.channel.Channel;
 import org.jdbi.v3.core.result.LinkedHashMapRowReducer;
 import org.jdbi.v3.core.result.RowView;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
@@ -15,8 +13,8 @@ import java.util.Map;
 @RegisterBeanMapper(value = Category.class, prefix = "c")
 @RegisterBeanMapper(value = Channel.class, prefix = "ch")
 public interface UserDAO {
-
-    @SqlQuery("SELECT u.user_id u_user_id, u.name u_name, u.email u_email, u.phone_number u_phone_number, " +
+String USERS_JOIN_CATEGORIES_JOIN_CHANNELS =
+        "SELECT u.user_id u_user_id, u.name u_name, u.email u_email, u.phone_number u_phone_number, " +
             "c.category_id c_category_id, c.name c_name, " +
             "ch.channel_id ch_channel_id, ch.name ch_name " +
             "FROM users u " +
@@ -25,9 +23,15 @@ public interface UserDAO {
             "JOIN categories c " +
             "ON users_categories.category_id = c.category_id " +
             "JOIN channels ch " +
-            "ON users_channels.channel_id = ch.channel_id")
+            "ON users_channels.channel_id = ch.channel_id";
+
+    @SqlQuery(USERS_JOIN_CATEGORIES_JOIN_CHANNELS)
     @UseRowReducer(UserCategoryChannelReducer.class)
     List<User> getUsersWithCategoriesAndChannels();
+
+    @SqlQuery(USERS_JOIN_CATEGORIES_JOIN_CHANNELS + " WHERE c.category_id = ?")
+    @UseRowReducer(UserCategoryChannelReducer.class)
+    List<User> getUsersWithCategoriesAndChannelsByCategory(Integer categoryId);
 
     class UserCategoryChannelReducer implements LinkedHashMapRowReducer<Integer, User> {
         @Override

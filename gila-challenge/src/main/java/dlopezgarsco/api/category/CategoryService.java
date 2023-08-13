@@ -1,6 +1,6 @@
-package dlopezgarsco.api.category.service;
+package dlopezgarsco.api.category;
 
-import dlopezgarsco.api.category.Category;
+import dlopezgarsco.db.Category;
 
 import java.util.List;
 

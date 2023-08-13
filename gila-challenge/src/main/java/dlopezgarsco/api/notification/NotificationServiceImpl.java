@@ -1,9 +1,6 @@
-package dlopezgarsco.api.notification.service;
+package dlopezgarsco.api.notification;
 
-import dlopezgarsco.api.notification.NotificationDAO;
-import dlopezgarsco.api.notification.NotificationLog;
-import dlopezgarsco.api.user.User;
-import dlopezgarsco.api.user.UserDAO;
+import dlopezgarsco.db.*;
 
 import java.util.List;
 
@@ -18,15 +15,19 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<NotificationLog> getNotificationsLogged() {
-        return notificationDAO.selectAll();
+        return notificationDAO.fetchLog();
     }
 
     @Override
-    public List<User> createNotification() {
-        List<User> users = userDAO.getUsersWithCategoriesAndChannels();
-        return null;
-        // crear notificación general
-        // juntar todos los usuarios suscriptos a la categoría
+    public List<Notification> getNotifications() {
+        return notificationDAO.fetch();
+    }
+
+    @Override
+    public Boolean createNotification(Notification notification) {
+        List<User> users = userDAO.getUsersWithCategoriesAndChannelsByCategory(notification.getCategoryId());
+        notificationDAO.insert(notification.getMessage(), notification.getCategoryId());
+        return true;
         // pasarle la notif a cada canal, generar log
     }
 }

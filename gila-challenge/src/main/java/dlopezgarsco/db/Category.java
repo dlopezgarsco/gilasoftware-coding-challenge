@@ -1,4 +1,4 @@
-package dlopezgarsco.api.category;
+package dlopezgarsco.db;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;

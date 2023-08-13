@@ -1,4 +1,4 @@
-package dlopezgarsco.api.notification;
+package dlopezgarsco.db;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

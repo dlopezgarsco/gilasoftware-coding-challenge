@@ -1,4 +1,4 @@
-package dlopezgarsco.api.category;
+package dlopezgarsco.db;
 
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;

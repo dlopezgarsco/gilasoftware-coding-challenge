@@ -1,12 +1,12 @@
 package dlopezgarsco;
 
-import dlopezgarsco.api.category.CategoryDAO;
+import dlopezgarsco.db.CategoryDAO;
 import dlopezgarsco.api.category.CategoryResource;
-import dlopezgarsco.api.category.service.CategoryServiceImpl;
-import dlopezgarsco.api.notification.NotificationDAO;
+import dlopezgarsco.api.category.CategoryServiceImpl;
+import dlopezgarsco.db.NotificationDAO;
 import dlopezgarsco.api.notification.NotificationResource;
-import dlopezgarsco.api.notification.service.NotificationServiceImpl;
-import dlopezgarsco.api.user.UserDAO;
+import dlopezgarsco.api.notification.NotificationServiceImpl;
+import dlopezgarsco.db.UserDAO;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
