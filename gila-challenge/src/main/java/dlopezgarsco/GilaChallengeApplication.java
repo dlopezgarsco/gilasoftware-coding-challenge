@@ -1,7 +1,12 @@
 package dlopezgarsco;
 
-import dlopezgarsco.db.UserDAO;
-import dlopezgarsco.resources.UserResource;
+import dlopezgarsco.api.category.CategoryDAO;
+import dlopezgarsco.api.category.CategoryResource;
+import dlopezgarsco.api.category.service.CategoryServiceImpl;
+import dlopezgarsco.api.notification.NotificationDAO;
+import dlopezgarsco.api.notification.NotificationResource;
+import dlopezgarsco.api.notification.service.NotificationServiceImpl;
+import dlopezgarsco.api.user.UserDAO;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
@@ -31,8 +36,13 @@ public class GilaChallengeApplication extends Application<GilaChallengeConfigura
                 .load()
                 .migrate();
         final Jdbi jdbi = new JdbiFactory().build(environment, config.getDataSourceFactory(), "h2");
+
+        final CategoryDAO categoryDAO = jdbi.onDemand(CategoryDAO.class);
         final UserDAO userDAO = jdbi.onDemand(UserDAO.class);
-        environment.jersey().register(new UserResource(userDAO));
+        final NotificationDAO notificationDAO = jdbi.onDemand(NotificationDAO.class);
+
+        environment.jersey().register(new CategoryResource(new CategoryServiceImpl(categoryDAO)));
+        environment.jersey().register(new NotificationResource(new NotificationServiceImpl(notificationDAO, userDAO)));
     }
 
 }
