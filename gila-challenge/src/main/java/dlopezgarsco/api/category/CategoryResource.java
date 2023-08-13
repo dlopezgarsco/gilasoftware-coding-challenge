@@ -1,5 +1,6 @@
 package dlopezgarsco.api.category;
 
+import dlopezgarsco.api.category.service.CategoryService;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
