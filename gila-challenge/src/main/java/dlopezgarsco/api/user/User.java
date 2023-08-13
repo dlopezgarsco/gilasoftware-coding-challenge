@@ -4,47 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 import dlopezgarsco.api.category.Category;
 import dlopezgarsco.api.channel.Channel;
-import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.Nested;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class User {
-    private final Integer id;
-    private final String name;
-    private final String email;
-    private final String phoneNumber;
-    private List<Category> categories;
-    private List<Channel> channels;
+    private Integer userId;
+    private String name;
+    private String email;
+    private String phoneNumber;
 
-    public User(
-            @ColumnName("id") Integer id,
-            @ColumnName("name") String name,
-            @ColumnName("email") String email,
-            @ColumnName("phone_number") String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public User(
-            Integer id,
-            String name,
-            String email,
-            String phoneNumber,
-            List<Category> categories,
-            List<Channel> channels) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.categories = categories;
-        this.channels = channels;
-    }
+    @Nested
+    private Set<Category> categories = new HashSet<>();
+    @Nested
+    private Set<Channel> channels = new HashSet<>();
 
     @JsonProperty
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
     @JsonProperty
@@ -65,7 +43,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + userId +
                 ", name='" + name + '\'' +
                 ", email=" + email +
                 ", phoneNumber=" + phoneNumber +
@@ -77,19 +55,45 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equal(id, user.id) && Objects.equal(name, user.name) && Objects.equal(email, user.email) && Objects.equal(phoneNumber, user.phoneNumber);
+        return Objects.equal(userId, user.userId) && Objects.equal(name, user.name) && Objects.equal(email, user.email) && Objects.equal(phoneNumber, user.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, email, phoneNumber);
+        return Objects.hashCode(userId, name, email, phoneNumber);
     }
 
-    public List<Category> getCategories() {
+    @JsonProperty
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public List<Channel> getChannels() {
+    @JsonProperty
+    public Set<Channel> getChannels() {
         return channels;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void setChannels(Set<Channel> channels) {
+        this.channels = channels;
     }
 }
