@@ -23,7 +23,7 @@ public class CategoryResource {
     }
 
     @GET
-    public List<Category> getAll() {
+    public List<Category> fetch() {
         return service.getAll();
     }
 }
