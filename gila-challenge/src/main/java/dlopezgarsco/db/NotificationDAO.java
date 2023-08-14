@@ -1,6 +1,8 @@
 package dlopezgarsco.db;
 
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.customizer.BindBean;
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
@@ -11,11 +13,22 @@ public interface NotificationDAO {
     @RegisterBeanMapper(Notification.class)
     List<Notification> fetch();
 
-    @SqlUpdate("INSERT INTO notifications (message, category_id) VALUES (?, ?)")
+    @SqlQuery("SELECT * FROM notifications WHERE notification_id = ?")
     @RegisterBeanMapper(Notification.class)
-    Boolean insert(String message, Integer categoryId);
+    Notification fetch(Integer notificationId);
+
+    @SqlUpdate("INSERT INTO notifications (message, category_id) VALUES (:message, :categoryId)")
+    @RegisterBeanMapper(Notification.class)
+    @GetGeneratedKeys("notification_id")
+    Integer insert(@BindBean Notification notification);
 
     @SqlQuery("SELECT * FROM notifications_log")
     @RegisterBeanMapper(NotificationLog.class)
     List<NotificationLog> fetchLog();
+
+    @SqlUpdate("INSERT INTO notifications_log (notification_id, user_id, channel_id, timestamp, success) " +
+                "VALUES (:notificationId, :userId, :channelId, now(), :success)")
+    @RegisterBeanMapper(NotificationLog.class)
+    @GetGeneratedKeys("notification_log_id")
+    Integer insertLog(@BindBean NotificationLog notificationLog);
 }

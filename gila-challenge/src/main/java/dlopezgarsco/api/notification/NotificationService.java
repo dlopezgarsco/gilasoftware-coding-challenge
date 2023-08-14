@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface NotificationService {
 
-    List<Notification> getNotifications();
-    Boolean createNotification(Notification notification);
-    List<NotificationLog> getNotificationsLogged();
+    Notification fetch(Integer notificationId);
+    List<Notification> fetch();
+    Integer create(Notification notification);
+    List<NotificationLog> fetchLog();
 
 }

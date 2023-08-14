@@ -1,5 +1,6 @@
 package dlopezgarsco;
 
+import dlopezgarsco.api.channel.ChannelServiceImpl;
 import dlopezgarsco.db.CategoryDAO;
 import dlopezgarsco.api.category.CategoryResource;
 import dlopezgarsco.api.category.CategoryServiceImpl;
@@ -37,12 +38,14 @@ public class GilaChallengeApplication extends Application<GilaChallengeConfigura
                 .migrate();
         final Jdbi jdbi = new JdbiFactory().build(environment, config.getDataSourceFactory(), "h2");
 
+        // TODO these could be all `Guice` injections but I kept it simple to avoid an extra library
         final CategoryDAO categoryDAO = jdbi.onDemand(CategoryDAO.class);
         final UserDAO userDAO = jdbi.onDemand(UserDAO.class);
         final NotificationDAO notificationDAO = jdbi.onDemand(NotificationDAO.class);
 
         environment.jersey().register(new CategoryResource(new CategoryServiceImpl(categoryDAO)));
-        environment.jersey().register(new NotificationResource(new NotificationServiceImpl(notificationDAO, userDAO)));
+        environment.jersey().register(new NotificationResource(
+                new NotificationServiceImpl(notificationDAO, userDAO, new ChannelServiceImpl())));
     }
 
 }

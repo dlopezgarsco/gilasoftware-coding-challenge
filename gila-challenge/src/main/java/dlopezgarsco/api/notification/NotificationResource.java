@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriBuilder;
 
 import java.util.List;
 
@@ -23,21 +24,27 @@ public class NotificationResource {
 
     @GET
     public List<Notification> fetch() {
-        return service.getNotifications();
+        return service.fetch();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Notification fetch(@PathParam("id") Integer notificationId) {
+        return service.fetch(notificationId);
     }
 
     @POST
     public Response create(@NotNull @Valid Notification notification) {
-        if (service.createNotification(notification))
-            return Response.ok().build();
-        else
-            return Response.serverError().build();
+        Integer notificationId = service.create(notification);
+        return Response
+                .created(UriBuilder.fromResource(NotificationResource.class).build(notificationId))
+                .build();
     }
 
     @GET
     @Path("/log")
     public List<NotificationLog> fetchLogs() {
-        return service.getNotificationsLogged();
+        return service.fetchLog();
     }
 
 }
