@@ -1,10 +1,14 @@
 package dlopezgarsco.db;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotEmpty;
 
 public class Notification {
     private Integer notificationId;
+
+    @NotEmpty
     private String message;
+
     private Integer categoryId;
 
     @JsonProperty
