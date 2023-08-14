@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.UriBuilder;
 import java.util.List;
 
 
-@Path("/notification")
+@Path("/api/notification")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class NotificationResource {

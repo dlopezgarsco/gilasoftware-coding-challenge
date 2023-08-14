@@ -11,3 +11,8 @@ database:
   minSize: 1
   maxSize: 1
   initialSize: 1
+
+web:
+  uriPath: /api
+  cors:
+    allowedOrigins: [ "*" ]

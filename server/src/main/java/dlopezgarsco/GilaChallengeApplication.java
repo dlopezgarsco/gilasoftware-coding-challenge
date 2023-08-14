@@ -9,9 +9,12 @@ import dlopezgarsco.api.notification.NotificationResource;
 import dlopezgarsco.api.notification.NotificationServiceImpl;
 import dlopezgarsco.db.UserDAO;
 import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi3.JdbiFactory;
+import io.dropwizard.web.WebBundle;
+import io.dropwizard.web.conf.WebConfiguration;
 import org.flywaydb.core.Flyway;
 import org.jdbi.v3.core.Jdbi;
 
@@ -24,6 +27,16 @@ public class GilaChallengeApplication extends Application<GilaChallengeConfigura
     @Override
     public String getName() {
         return "GilaChallenge";
+    }
+
+    @Override
+    public void initialize(final Bootstrap<GilaChallengeConfiguration> bootstrap) {
+        bootstrap.addBundle(new WebBundle<>() {
+            @Override
+            public WebConfiguration getWebConfiguration(GilaChallengeConfiguration config) {
+                return config.getWebConfiguration();
+            }
+        });
     }
 
     @Override

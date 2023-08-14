@@ -11,7 +11,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 
-@Path("/category")
+@Path("/api/category")
 @Produces(MediaType.APPLICATION_JSON)
 @Singleton
 public class CategoryResource {
