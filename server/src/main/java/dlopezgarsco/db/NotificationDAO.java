@@ -22,7 +22,7 @@ public interface NotificationDAO {
     @GetGeneratedKeys("notification_id")
     Integer insert(@BindBean Notification notification);
 
-    @SqlQuery("SELECT * FROM notifications_log")
+    @SqlQuery("SELECT * FROM notifications_log ORDER BY timestamp DESC")
     @RegisterBeanMapper(NotificationLog.class)
     List<NotificationLog> fetchLog();
 
