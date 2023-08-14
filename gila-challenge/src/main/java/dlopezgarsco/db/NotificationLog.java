@@ -9,7 +9,7 @@ public class NotificationLog {
     private Integer notificationId;
     private Integer userId;
     private Integer channelId;
-    private LocalDateTime date;
+    private LocalDateTime timestamp;
     private Boolean success;
 
     @JsonProperty
@@ -28,8 +28,8 @@ public class NotificationLog {
     }
 
     @JsonProperty
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     @JsonProperty
@@ -63,8 +63,8 @@ public class NotificationLog {
     }
 
     @JsonProperty
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     @JsonProperty
