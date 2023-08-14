@@ -1,0 +1,29 @@
+@import url('~simpledotcss/simple.min.css');
+
+:root {
+    --white: hsl(0, 0%, 100%);
+    --light-gray: hsl(212, 45%, 89%);
+    --dark-blue: hsl(218, 44%, 22%);
+    --light-blue: hsl(218, 44%, 50%);
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    display: flex;
+    font-size: 1rem;
+    padding: 5rem 5%;
+    min-height: 100vh;
+    position: relative;
+    align-items: center;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Outfit", sans-serif;
+    background-color: var(--light-gray);
+}
+
+textarea {
+  resize: none;
+  min-height: 10vw;
+}
